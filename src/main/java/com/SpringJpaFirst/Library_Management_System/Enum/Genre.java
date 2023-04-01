@@ -6,5 +6,6 @@ public enum Genre{
     COMIC,
     PHYSICS,
     COMPUTER,
-    HORROR
+    HORROR,
+    SCIENCE,
 }

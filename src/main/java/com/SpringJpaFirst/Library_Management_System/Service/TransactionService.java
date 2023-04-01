@@ -6,6 +6,8 @@ import com.SpringJpaFirst.Library_Management_System.Entity.LibraryCard;
 import com.SpringJpaFirst.Library_Management_System.Entity.Transaction;
 import com.SpringJpaFirst.Library_Management_System.Enum.Status;
 import com.SpringJpaFirst.Library_Management_System.Enum.TransactionStatus;
+import com.SpringJpaFirst.Library_Management_System.Exception.BookNotFoundException;
+import com.SpringJpaFirst.Library_Management_System.Exception.CardNotFoundException;
 import com.SpringJpaFirst.Library_Management_System.Repository.BookRepository;
 import com.SpringJpaFirst.Library_Management_System.Repository.CardRepository;
 import com.SpringJpaFirst.Library_Management_System.Repository.TransactionRepository;
@@ -16,77 +18,75 @@ import java.util.UUID;
 
 @Service
 public class TransactionService{
-    @Autowired
-    CardRepository cardRepo;
-    @Autowired
-    TransactionRepository transRepo;
-    @Autowired
-    BookRepository bookRepo;
 
-    public IssueBookResponseDto issueBooks(IssueBookRequestDto requestDto) throws Exception{
-
-        Transaction transaction=new Transaction();
-        transaction.setTransactionNUmber(String.valueOf(UUID.randomUUID()));
+    @Autowired
+    TransactionRepository transactionRepository;
+    @Autowired
+    BookRepository bookRepository;
+    @Autowired
+    CardRepository cardRepository;
+    public IssueBookResponseDto issueNewBookTransaction(IssueBookRequestDto requestDto) throws Exception {
+        Transaction transaction = new Transaction();
+        transaction.setTransactionNumber(String.valueOf(UUID.randomUUID()));
         transaction.setTransactionIssued(true);
 
-        LibraryCard card;
-        try{
-            card=cardRepo.findById(requestDto.getCardId()).get();  //for check card is register or not
-        }
-        catch(Exception e)
-        {
-            transaction.setTransactionStatus(TransactionStatus.FAILED);
-            transaction.setMassage("Invalid Card Id");
-            transRepo.save(transaction);
-            throw new Exception("Invalid Card id.");
-        }
         Book book;
-        try{
-            book=bookRepo.findById(requestDto.getBookId()).get();     // for check book is register or not..
-        }
-        catch(Exception e)
-        {
+        try {
+            book = bookRepository.findById(requestDto.getBookId()).get();
+        } catch (Exception e) {
             transaction.setTransactionStatus(TransactionStatus.FAILED);
-            transaction.setMassage("Invalid Book Id");
-            transRepo.save(transaction);
-            throw new Exception("Invalid Book Id");
+            transactionRepository.save(transaction);
+            transaction.setMassage("Book id is invalid!!!");
+            throw new BookNotFoundException("Book id is invalid");
+        }
+
+        LibraryCard card;
+        try {
+            card = cardRepository.findById(requestDto.getCardId()).get();
+        } catch (Exception e) {
+            transaction.setTransactionStatus(TransactionStatus.FAILED);
+            transactionRepository.save(transaction);
+            transaction.setMassage("Card id Is invalid!!");
+            throw new CardNotFoundException("Card id Is invalid!!");
         }
 
         transaction.setBook(book);
         transaction.setCard(card);
-        //for check the two condition
-        if(card.getStatus()!= Status.ACTIVATED)
-        {
+
+        if (card.getStatus() != Status.ACTIVATED) {
             transaction.setTransactionStatus(TransactionStatus.FAILED);
-            transaction.setMassage("Your card is not activated.");
-            transRepo.save(transaction);
-            throw new Exception("Your card is not activated.");
+            transactionRepository.save(transaction);
+            transaction.setMassage("Opps..!! Your card is not Active");
+            throw new Exception("Opps..!! Your card is not Active");
         }
-        if(book.isIssued()==true)
-        {
+        if (book.isBookIsIssued()==true){
             transaction.setTransactionStatus(TransactionStatus.FAILED);
-            transaction.setMassage("The book is already Issued..you Can't take it again.");
-            transRepo.save(transaction);
-            throw new Exception("The book is already Issued..you Can't take it again.");
+            transactionRepository.save(transaction);
+            transaction.setMassage("Opps..!! Book is All Ready Issue");
+            throw new Exception("Opps..!! Book is All Ready Issue");
         }
-        //Now can save the new record in our db
+
         transaction.setTransactionStatus(TransactionStatus.SUCCESS);
-        book.setIssued(true);
+        transaction.setMassage("Transaction is success..");
+        book.setBookIsIssued(true);
         book.setCard(card);
-        book.getTransaction().add(transaction);
-        card.getBookIssued().add(book);
+        book.getTransactionList().add(transaction);
         card.getTransactionList().add(transaction);
+        card.getBookIssued().add(book);
 
-        cardRepo.save(card);  //save the final parent class card...because if you save the card also
-                             //save the child(book,transaction automatic.
+        cardRepository.save(card); //card is parent of book and transaction so book and transaction will save it.
 
-        //for return perpose..
-        IssueBookResponseDto issueBookResponseDto=new IssueBookResponseDto();
-        issueBookResponseDto.setTransactionId(transaction.getTransactionNUmber());
-        issueBookResponseDto.setTStatus(TransactionStatus.SUCCESS);
-        issueBookResponseDto.setBookName(book.getTitle());
-        issueBookResponseDto.setBookPrice(book.getPrice());
 
-        return issueBookResponseDto;
+        //make the IssueBook response dto
+
+        IssueBookResponseDto bookResponseDto = new IssueBookResponseDto();
+        bookResponseDto.setBookName(book.getBookTitle());
+        bookResponseDto.setTransactionNumber(transaction.getTransactionNumber());
+        bookResponseDto.setCardId(card.getCardId());
+        bookResponseDto.setTansactionDate(transaction.getTransactionDate());
+        bookResponseDto.setTransactionStatus(TransactionStatus.SUCCESS);
+        return bookResponseDto;
+        }
     }
-}
+
+

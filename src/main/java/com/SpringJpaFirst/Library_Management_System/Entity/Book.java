@@ -1,10 +1,7 @@
 package com.SpringJpaFirst.Library_Management_System.Entity;
 
 import com.SpringJpaFirst.Library_Management_System.Enum.Genre;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.*;
@@ -13,24 +10,21 @@ import java.util.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Book{
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String title;
+    private int bookId;
+    private String bookTitle;
     private int price;
-
     @Enumerated(EnumType.STRING)
     private Genre genre;
-
-    private boolean isIssued;
+    private boolean bookIsIssued;
     @ManyToOne
     @JoinColumn
     Author author;
     @OneToMany(mappedBy = "book",cascade = CascadeType.ALL)
-    List<Transaction> transaction=new ArrayList<>();
-
+    List<Transaction> transactionList=new ArrayList<>();
     @ManyToOne
     @JoinColumn
     LibraryCard card;

@@ -1,10 +1,7 @@
 package com.SpringJpaFirst.Library_Management_System.Entity;
 
 import com.SpringJpaFirst.Library_Management_System.Enum.Department;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,16 +10,16 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Student{
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int studentId;
-    private String name;
-    private int age;
+    private String studentName;
+    private int studentAge;
     @Enumerated(EnumType.STRING)
     private Department department;
-    private String email;
+    private String studentEmail;
     @OneToOne(mappedBy ="student",cascade = CascadeType.ALL)
     LibraryCard card;
 }

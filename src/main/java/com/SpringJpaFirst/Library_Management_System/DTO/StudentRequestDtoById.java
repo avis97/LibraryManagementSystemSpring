@@ -1,17 +1,13 @@
 package com.SpringJpaFirst.Library_Management_System.DTO;
 
-
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
-public class StudentUpdateClass{
-
-    public int id;
-    public String email;
+@Builder
+public class StudentRequestDtoById {
+    private int studentId;
 }

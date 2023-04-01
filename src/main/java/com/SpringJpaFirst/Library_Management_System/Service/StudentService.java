@@ -1,52 +1,73 @@
 package com.SpringJpaFirst.Library_Management_System.Service;
 
-
-import com.SpringJpaFirst.Library_Management_System.DTO.StudentRequestDto;
-import com.SpringJpaFirst.Library_Management_System.DTO.StudentResponseDTO;
-import com.SpringJpaFirst.Library_Management_System.DTO.StudentUpdateClass;
+import com.SpringJpaFirst.Library_Management_System.Converter.StudentConverter;
+import com.SpringJpaFirst.Library_Management_System.DTO.*;
 import com.SpringJpaFirst.Library_Management_System.Entity.LibraryCard;
 import com.SpringJpaFirst.Library_Management_System.Entity.Student;
+import com.SpringJpaFirst.Library_Management_System.Enum.Status;
 import com.SpringJpaFirst.Library_Management_System.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.SpringJpaFirst.Library_Management_System.Enum.Status;
+
 @Service
-public class StudentService{
+public class StudentService {
 
     @Autowired
-    StudentRepository repo;
-    public void addStudent(StudentRequestDto studentDto){
-        //create student object
-        Student student=new Student();
-        student.setName(studentDto.getName());
-        student.setEmail(studentDto.getEmail());
-        student.setAge(studentDto.getAge());
-        student.setDepartment(studentDto.getDepartment());
+    StudentRepository studentRepository;
 
-        //create card object..
-        LibraryCard card=new LibraryCard();
+    public StudentResponseDto addStudent(StudentRequestDto studentRequestDto) {
+        //convert studentRequestDto to student by using StudentConverter
+        Student student = StudentConverter.studentRequestDtoToStudent(studentRequestDto);
+
+        // Have to generate new card when student will register.
+        LibraryCard card = new LibraryCard();
         card.setStatus(Status.ACTIVATED);
-        card.setValidDate("3/2025");
+        card.setValidDate("06/2025");
         card.setStudent(student);
-
+        //put the card details in student models.
         student.setCard(card);
-        repo.save(student);
+
+        //save the student in the database.
+        studentRepository.save(student);
+
+        //convert student to studentResponseDto
+        StudentResponseDto studentResponseDto = StudentConverter.studentToStudentResponseDto(student);
+
+        return studentResponseDto;
+    }
+    public StudentResponseDto findByEmail(StudentRequestDtoByEmail forEmail){
+
+        //find the student by email...the filebyemail method have in student repository
+        Student student=studentRepository.findByStudentEmail(forEmail.getStudentEmail());
+
+        StudentResponseDto studentResponseDto=StudentConverter.studentToStudentResponseDto(student);
+        return studentResponseDto;
 
     }
-    public String findNameByEmail(String email){
-        Student student=repo.findByEmail(email);
-        return student.getName();
+    public StudentResponseDto findById(StudentRequestDtoById id){
+        //get the student by id
+        Student student=studentRepository.findById(id.getStudentId()).get();
+
+        StudentResponseDto studentResponseDto=StudentConverter.studentToStudentResponseDto(student);
+        return studentResponseDto;
     }
-    public StudentResponseDTO updateStudentEmail(StudentUpdateClass sUpdate){
-        Student student=repo.findById(sUpdate.getId()).get();
-        student.setEmail(sUpdate.getEmail());
-        //update step;
-        Student updateStudentEmail=repo.save(student);
-        //update the return type.. convert update to response..
-        StudentResponseDTO updateStudentDto=new StudentResponseDTO();
-        updateStudentDto.setId(updateStudentEmail.getStudentId());
-        updateStudentDto.setName(updateStudentEmail.getName());
-        updateStudentDto.setEmail(updateStudentEmail.getEmail());
-        return updateStudentDto;
+    public String deleteStudentById(StudentRequestDtoById id){
+
+        Student student=studentRepository.findById(id.getStudentId()).get();
+        studentRepository.delete(student);
+        String name=student.getStudentName();
+        return name+" This student deleted!!";
+    }
+    public StudentResponseDto updateStudentById(BookRequestDtoForUpdate email){
+
+        Student student=studentRepository.findById(email.getStudentId()).get();
+         //set the new email in student
+        student.setStudentEmail(email.getNewEmail());
+        //newStudent variable Hold the New Student all property..
+        Student newStudent=studentRepository.save(student);
+        //convert student to studentResponse Dto,,
+        StudentResponseDto NewStudent=StudentConverter.studentToStudentResponseDto(newStudent);
+
+        return NewStudent;
     }
 }

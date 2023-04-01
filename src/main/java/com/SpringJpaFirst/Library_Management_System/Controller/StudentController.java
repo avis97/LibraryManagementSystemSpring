@@ -1,35 +1,38 @@
 package com.SpringJpaFirst.Library_Management_System.Controller;
 
-
-import com.SpringJpaFirst.Library_Management_System.DTO.StudentRequestDto;
-import com.SpringJpaFirst.Library_Management_System.DTO.StudentResponseDTO;
-import com.SpringJpaFirst.Library_Management_System.DTO.StudentUpdateClass;
-import com.SpringJpaFirst.Library_Management_System.Entity.Student;
+import com.SpringJpaFirst.Library_Management_System.DTO.*;
 import com.SpringJpaFirst.Library_Management_System.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.transaction.Status;
 
 @RestController
 @RequestMapping("/student")
 public class StudentController{
     @Autowired
-    StudentService studentservice;
+    StudentService studentService;
     @PostMapping("/add")
-    public String addStudent(@RequestBody StudentRequestDto student)
+    private StudentResponseDto addStudent(@RequestBody StudentRequestDto studentRequestDto)
     {
-        studentservice.addStudent(student);
-        return "Student added successfully.";
+        return studentService.addStudent(studentRequestDto);
     }
     @GetMapping("/find_by_email")
-    public String findNameByEmail(@RequestParam("email") String email)
+    private StudentResponseDto getStudentByEmail(@RequestBody StudentRequestDtoByEmail studentRequestDtoByEmail)
     {
-        return studentservice.findNameByEmail(email);
+        return studentService.findByEmail(studentRequestDtoByEmail);
     }
-    @PutMapping("/updateStudentEmail")
-    public StudentResponseDTO updateStudentEmail(@RequestBody StudentUpdateClass sUpdate)
+    @GetMapping("/find_by_id")
+    private StudentResponseDto getStudentByNo(@RequestBody StudentRequestDtoById id)
     {
-        return studentservice.updateStudentEmail(sUpdate);
+        return studentService.findById(id);
+    }
+    @PutMapping("update_by_id")
+    private StudentResponseDto updateStudentById(@RequestBody BookRequestDtoForUpdate email)
+    {
+        return studentService.updateStudentById(email);
+    }
+    @DeleteMapping("/delete_by_id")
+    private  String  deleteStudentById(@RequestBody StudentRequestDtoById id)
+    {
+       return studentService.deleteStudentById(id);
     }
 }

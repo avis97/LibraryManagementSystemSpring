@@ -1,19 +1,20 @@
 package com.SpringJpaFirst.Library_Management_System.DTO;
 
-
 import com.SpringJpaFirst.Library_Management_System.Enum.Genre;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
+@Builder
 public class BookRequestDto{
-    private String title;
+    private String bookName;
     private int price;
     private Genre genre;
+    private boolean bookIsIssued;
     private int authorId;
+
 }

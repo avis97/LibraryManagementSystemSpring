@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class StudentRequestDto{
-    private String name;
-    private int age;
-    private Department department;
-    private String email;
+public class StudentResponseDto{
+    private String StudentName;
+    private String StudentEmail;
+    private Department Department;
+    private int Age;
 }

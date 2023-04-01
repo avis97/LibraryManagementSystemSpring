@@ -16,24 +16,20 @@ import java.util.Date;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Transaction {
-
+public class Transaction{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String transactionNUmber;
+    private String transactionNumber;
     @Enumerated(EnumType.STRING)
     private TransactionStatus transactionStatus;
     @CreationTimestamp
     private Date transactionDate;
-
     private boolean transactionIssued;
     private String Massage;
-
     @ManyToOne
     @JoinColumn
     Book book;
-
     @ManyToOne
     @JoinColumn
     LibraryCard card;

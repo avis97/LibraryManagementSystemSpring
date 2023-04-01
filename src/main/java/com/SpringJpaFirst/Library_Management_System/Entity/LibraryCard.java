@@ -26,7 +26,6 @@ public class LibraryCard{
     private String validDate;
     @Enumerated(EnumType.STRING)
     private Status status;
-
     @CreationTimestamp
     private Date creatationDate;
     @UpdateTimestamp
@@ -34,10 +33,8 @@ public class LibraryCard{
     @OneToOne
     @JoinColumn
     Student student;
-
     @OneToMany(mappedBy = "card",cascade = CascadeType.ALL)
     List<Transaction> transactionList=new ArrayList<>();
-
     @OneToMany(mappedBy = "card",cascade = CascadeType.ALL)
     List<Book> bookIssued=new ArrayList<>();
 }

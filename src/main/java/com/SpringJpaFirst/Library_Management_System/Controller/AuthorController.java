@@ -1,7 +1,7 @@
 package com.SpringJpaFirst.Library_Management_System.Controller;
 
-
-import com.SpringJpaFirst.Library_Management_System.Entity.Author;
+import com.SpringJpaFirst.Library_Management_System.DTO.AuthorRequestDto;
+import com.SpringJpaFirst.Library_Management_System.DTO.AuthorResponseDto;
 import com.SpringJpaFirst.Library_Management_System.Service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/author")
 public class AuthorController{
-
     @Autowired
-    AuthorService aService;
+    AuthorService authorService;
     @PostMapping("/add")
-    public String addAuthor(@RequestBody Author author)
+    public AuthorResponseDto addAuthor(@RequestBody AuthorRequestDto authorRequestDto)
     {
-        aService.addAuthor(author);
-        return "Author added successfully.";
+         return  authorService.addAuthor(authorRequestDto);
     }
 }

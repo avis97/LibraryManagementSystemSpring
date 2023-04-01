@@ -1,19 +1,21 @@
 package com.SpringJpaFirst.Library_Management_System.DTO;
 
-
 import com.SpringJpaFirst.Library_Management_System.Enum.TransactionStatus;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+import java.util.Date;
+
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
+@Builder
 public class IssueBookResponseDto{
-      private String TransactionId;
-      private String bookName;
-      private int bookPrice;
-      private TransactionStatus tStatus;
+    private String transactionNumber;
+    private String bookName;
+    private int cardId;
+    private Date tansactionDate;
+    private TransactionStatus transactionStatus;
 }

@@ -1,38 +1,62 @@
 package com.SpringJpaFirst.Library_Management_System.Service;
 
-
+import java.util.*;
+import com.SpringJpaFirst.Library_Management_System.Converter.BookConverter;
 import com.SpringJpaFirst.Library_Management_System.DTO.BookRequestDto;
+import com.SpringJpaFirst.Library_Management_System.DTO.BookRequestDtoByName;
 import com.SpringJpaFirst.Library_Management_System.DTO.BookResponseDto;
 import com.SpringJpaFirst.Library_Management_System.Entity.Author;
 import com.SpringJpaFirst.Library_Management_System.Entity.Book;
+import com.SpringJpaFirst.Library_Management_System.Exception.AuthorNotFoundException;
 import com.SpringJpaFirst.Library_Management_System.Repository.AuthorRepository;
 import com.SpringJpaFirst.Library_Management_System.Repository.BookRepository;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.*;
 
 @Service
-public class BookService{
+public class BookService {
     @Autowired
-    AuthorRepository authorRepo;
-    public BookResponseDto addBooks(BookRequestDto bookDto){
-        Author author=authorRepo.findById(bookDto.getAuthorId()).get();
+    AuthorRepository authorRepository;
+    @Autowired
+    BookRepository bookRepository;
+    public BookResponseDto addBook(BookRequestDto bookRequestDto) throws AuthorNotFoundException{
+        Author author;
+        try{
+            author=authorRepository.findById(bookRequestDto.getAuthorId()).get(); //check author present or not
+        }
+        catch(Exception e)
+        {
+            throw new AuthorNotFoundException("Ops!!Author Not Found In Our Portal");
+        }
+        //convert bookRequestDto to Book
+        Book book= BookConverter.bookRequestDtoToBook(bookRequestDto);
 
-        Book book=new Book();
-        book.setTitle(bookDto.getTitle());
-        book.setPrice(bookDto.getPrice());
-        book.setGenre(bookDto.getGenre());
-        book.setIssued(false);
+        //add the author im the book data;
         book.setAuthor(author);
 
-        author.getBook().add(book);
-        authorRepo.save(author);
+        //add the book in the author bookList
+        List<Book> bookList=author.getBook();
+        bookList.add(book);
 
-        BookResponseDto bookResDto=new BookResponseDto();
-        bookResDto.setTitle(book.getTitle());
-        bookResDto.setPrice(book.getPrice());
+        //save the author because book is a child of author
+        authorRepository.save(author);
 
-        return bookResDto;
+        //prepare book to bookResponseDto
+        BookResponseDto bookResponseDto=BookConverter.bookToBookResponseDto(book);
+        return bookResponseDto;
+    }
+    public BookResponseDto getBookByName(BookRequestDtoByName name){
+
+        Book book=bookRepository.findByBookTitle(name.getBookName());
+
+        //Convert book to bookResponseDto by BookConverter.
+        BookResponseDto bookResponseDto=BookConverter.bookToBookResponseDto(book);
+        return bookResponseDto;
+    }
+    public String deleteBookByName(BookRequestDtoByName name){
+        Book book=bookRepository.findByBookTitle(name.getBookName());
+        bookRepository.delete(book);
+        String Name=book.getBookTitle();
+        return Name+" This Book Deleted Done!!";
     }
 }

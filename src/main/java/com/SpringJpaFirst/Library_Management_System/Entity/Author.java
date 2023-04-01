@@ -1,10 +1,6 @@
 package com.SpringJpaFirst.Library_Management_System.Entity;
 
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import java.util.*;
 import javax.persistence.*;
 
@@ -13,17 +9,15 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Setter
 @Getter
+@Builder
 public class Author{
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
-    private int age;
-    private String mobNumber;
-    private String email;
-
+    private int authorId;
+    private String authorName;
+    private int authorAge;
+    private String authorPhoneNo;
+    private String authorEmail;
     @OneToMany(mappedBy = "author",cascade = CascadeType.ALL)
     List<Book> book=new ArrayList<>();
-
 }

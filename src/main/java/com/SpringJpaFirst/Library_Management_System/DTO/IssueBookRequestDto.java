@@ -1,16 +1,15 @@
 package com.SpringJpaFirst.Library_Management_System.DTO;
 
-
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
+@Builder
 public class IssueBookRequestDto{
-      private int cardId;
-      private int bookId;
+    private int bookId;
+    private int cardId;
 }
