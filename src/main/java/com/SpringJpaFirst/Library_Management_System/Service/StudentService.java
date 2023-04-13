@@ -1,13 +1,16 @@
 package com.SpringJpaFirst.Library_Management_System.Service;
 
+import com.SpringJpaFirst.Library_Management_System.Controller.StudentController;
 import com.SpringJpaFirst.Library_Management_System.Converter.StudentConverter;
 import com.SpringJpaFirst.Library_Management_System.DTO.*;
 import com.SpringJpaFirst.Library_Management_System.Entity.LibraryCard;
 import com.SpringJpaFirst.Library_Management_System.Entity.Student;
 import com.SpringJpaFirst.Library_Management_System.Enum.Status;
-import com.SpringJpaFirst.Library_Management_System.Repository.StudentRepository;
+import com.SpringJpaFirst.Library_Management_System.Repository.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.*;
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -69,5 +72,36 @@ public class StudentService {
         StudentResponseDto NewStudent=StudentConverter.studentToStudentResponseDto(newStudent);
 
         return NewStudent;
+    }
+
+    public List<StudentResponseDto> allStudentDetails(){
+         List<Student> students=studentRepository.findAll();
+
+         List<StudentResponseDto> studentList=new ArrayList<>();
+         for(Student student:students)
+         {
+             StudentResponseDto studentResponseDto=StudentConverter.studentToStudentResponseDto(student);
+             studentList.add(studentResponseDto);
+         }
+
+         return studentList;
+    }
+
+    public StudentResponseDto highestAgeStudent(){
+        List<Student> students=studentRepository.findAll();
+        int maxAge=0;
+        Student mainStudent=new Student();
+        for(Student student:students)
+        {
+            int age=student.getStudentAge();
+            if(maxAge<age)
+            {
+                maxAge=age;
+                mainStudent=student;
+            }
+        }
+        //convert to studentResponseDto
+        StudentResponseDto studentResponseDto=StudentConverter.studentToStudentResponseDto(mainStudent);
+        return studentResponseDto;
     }
 }

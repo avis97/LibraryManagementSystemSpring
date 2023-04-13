@@ -22,7 +22,7 @@ public class StudentConverter{
         return StudentResponseDto.builder()
                 .StudentName(student.getStudentName())
                 .StudentEmail(student.getStudentEmail())
-                .Age(student.getStudentId())
+                .Age(student.getStudentAge())
                 .Department(student.getDepartment())
                 .build();
     }

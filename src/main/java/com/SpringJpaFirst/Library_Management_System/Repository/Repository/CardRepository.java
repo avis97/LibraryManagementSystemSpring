@@ -1,4 +1,4 @@
-package com.SpringJpaFirst.Library_Management_System.Repository;
+package com.SpringJpaFirst.Library_Management_System.Repository.Repository;
 
 import com.SpringJpaFirst.Library_Management_System.Entity.LibraryCard;
 import org.springframework.data.jpa.repository.JpaRepository;

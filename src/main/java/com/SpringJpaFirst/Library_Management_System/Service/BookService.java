@@ -8,8 +8,8 @@ import com.SpringJpaFirst.Library_Management_System.DTO.BookResponseDto;
 import com.SpringJpaFirst.Library_Management_System.Entity.Author;
 import com.SpringJpaFirst.Library_Management_System.Entity.Book;
 import com.SpringJpaFirst.Library_Management_System.Exception.AuthorNotFoundException;
-import com.SpringJpaFirst.Library_Management_System.Repository.AuthorRepository;
-import com.SpringJpaFirst.Library_Management_System.Repository.BookRepository;
+import com.SpringJpaFirst.Library_Management_System.Repository.Repository.AuthorRepository;
+import com.SpringJpaFirst.Library_Management_System.Repository.Repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -8,9 +8,9 @@ import com.SpringJpaFirst.Library_Management_System.Enum.Status;
 import com.SpringJpaFirst.Library_Management_System.Enum.TransactionStatus;
 import com.SpringJpaFirst.Library_Management_System.Exception.BookNotFoundException;
 import com.SpringJpaFirst.Library_Management_System.Exception.CardNotFoundException;
-import com.SpringJpaFirst.Library_Management_System.Repository.BookRepository;
-import com.SpringJpaFirst.Library_Management_System.Repository.CardRepository;
-import com.SpringJpaFirst.Library_Management_System.Repository.TransactionRepository;
+import com.SpringJpaFirst.Library_Management_System.Repository.Repository.BookRepository;
+import com.SpringJpaFirst.Library_Management_System.Repository.Repository.CardRepository;
+import com.SpringJpaFirst.Library_Management_System.Repository.Repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

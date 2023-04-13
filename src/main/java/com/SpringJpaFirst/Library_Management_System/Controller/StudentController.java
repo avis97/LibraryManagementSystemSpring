@@ -1,5 +1,5 @@
 package com.SpringJpaFirst.Library_Management_System.Controller;
-
+import java.util.*;
 import com.SpringJpaFirst.Library_Management_System.DTO.*;
 import com.SpringJpaFirst.Library_Management_System.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +29,16 @@ public class StudentController{
     private StudentResponseDto updateStudentById(@RequestBody BookRequestDtoForUpdate email)
     {
         return studentService.updateStudentById(email);
+    }
+    @GetMapping("/allStudent")
+    private List<StudentResponseDto> allStudentDetails()
+    {
+        return studentService.allStudentDetails();
+    }
+    @GetMapping("/highestAgeStudent")
+    public StudentResponseDto highestAgeStudent()
+    {
+        return studentService.highestAgeStudent();
     }
     @DeleteMapping("/delete_by_id")
     private  String  deleteStudentById(@RequestBody StudentRequestDtoById id)
