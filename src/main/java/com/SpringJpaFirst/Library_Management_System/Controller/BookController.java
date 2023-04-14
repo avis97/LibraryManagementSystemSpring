@@ -1,5 +1,5 @@
 package com.SpringJpaFirst.Library_Management_System.Controller;
-
+import java.util.*;
 import com.SpringJpaFirst.Library_Management_System.DTO.BookRequestDto;
 import com.SpringJpaFirst.Library_Management_System.DTO.BookRequestDtoByName;
 import com.SpringJpaFirst.Library_Management_System.DTO.BookResponseDto;
@@ -29,6 +29,16 @@ public class BookController{
     private BookResponseDto getBookByName(@RequestBody BookRequestDtoByName name)
     {
         return bookService.getBookByName(name);
+    }
+    @GetMapping("/allBooks")
+    private List<BookResponseDto> getAllBooks()
+    {
+        return bookService.getAllBooks();
+    }
+    @PutMapping("/updateBookdetails")
+    private BookResponseDto updateBookDetailsByName(@RequestBody BookRequestDto bookRequestDto)
+    {
+        return bookService.updateBookDetailsByName(bookRequestDto);
     }
     @DeleteMapping("/delete_book_byName")
     private String deleteBookById(@RequestBody BookRequestDtoByName name)

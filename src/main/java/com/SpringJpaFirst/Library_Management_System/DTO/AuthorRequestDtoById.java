@@ -11,4 +11,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AuthorRequestDtoById{
     private int authorId;
+    private String newEmail;
 }

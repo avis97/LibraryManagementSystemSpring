@@ -26,7 +26,7 @@ public class StudentController{
         return studentService.findById(id);
     }
     @PutMapping("update_by_id")
-    private StudentResponseDto updateStudentById(@RequestBody BookRequestDtoForUpdate email)
+    private StudentResponseDto updateStudentById(@RequestBody StudentRequestDtoForUpdate email)
     {
         return studentService.updateStudentById(email);
     }

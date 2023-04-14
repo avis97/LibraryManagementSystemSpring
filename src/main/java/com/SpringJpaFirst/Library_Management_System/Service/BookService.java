@@ -8,10 +8,13 @@ import com.SpringJpaFirst.Library_Management_System.DTO.BookResponseDto;
 import com.SpringJpaFirst.Library_Management_System.Entity.Author;
 import com.SpringJpaFirst.Library_Management_System.Entity.Book;
 import com.SpringJpaFirst.Library_Management_System.Exception.AuthorNotFoundException;
+import com.SpringJpaFirst.Library_Management_System.Exception.BookNotFoundException;
 import com.SpringJpaFirst.Library_Management_System.Repository.Repository.AuthorRepository;
 import com.SpringJpaFirst.Library_Management_System.Repository.Repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.swing.border.AbstractBorder;
 
 @Service
 public class BookService {
@@ -58,5 +61,33 @@ public class BookService {
         bookRepository.delete(book);
         String Name=book.getBookTitle();
         return Name+" This Book Deleted Done!!";
+    }
+
+    public List<BookResponseDto> getAllBooks(){
+        List<Book> books=bookRepository.findAll();
+
+        List<BookResponseDto> bookList=new ArrayList<>();
+        for(Book book:books)
+        {
+            BookResponseDto bookResponseDto=BookConverter.bookToBookResponseDto(book);
+            bookList.add(bookResponseDto);
+        }
+        return bookList;
+    }
+
+    public BookResponseDto updateBookDetailsByName(BookRequestDto bookRequestDto){
+
+          Book book=bookRepository.findByBookTitle(bookRequestDto.getBookName());
+
+          book.setPrice(bookRequestDto.getPrice());
+
+          Author author=book.getAuthor();
+
+          authorRepository.save(author);
+
+          //make to a bookResponseDto
+          BookResponseDto bookResponseDto=BookConverter.bookToBookResponseDto(book);
+
+          return bookResponseDto;
     }
 }

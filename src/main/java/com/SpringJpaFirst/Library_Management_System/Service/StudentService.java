@@ -1,6 +1,5 @@
 package com.SpringJpaFirst.Library_Management_System.Service;
 
-import com.SpringJpaFirst.Library_Management_System.Controller.StudentController;
 import com.SpringJpaFirst.Library_Management_System.Converter.StudentConverter;
 import com.SpringJpaFirst.Library_Management_System.DTO.*;
 import com.SpringJpaFirst.Library_Management_System.Entity.LibraryCard;
@@ -61,7 +60,7 @@ public class StudentService {
         String name=student.getStudentName();
         return name+" This student deleted!!";
     }
-    public StudentResponseDto updateStudentById(BookRequestDtoForUpdate email){
+    public StudentResponseDto updateStudentById(StudentRequestDtoForUpdate email){
 
         Student student=studentRepository.findById(email.getStudentId()).get();
          //set the new email in student

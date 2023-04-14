@@ -5,6 +5,7 @@ import com.SpringJpaFirst.Library_Management_System.DTO.AuthorRequestDto;
 import com.SpringJpaFirst.Library_Management_System.DTO.AuthorRequestDtoById;
 import com.SpringJpaFirst.Library_Management_System.DTO.AuthorResponseDto;
 import com.SpringJpaFirst.Library_Management_System.Entity.Author;
+import com.SpringJpaFirst.Library_Management_System.Exception.AuthorNotFoundException;
 import com.SpringJpaFirst.Library_Management_System.Repository.Repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class AuthorService {
 
         //save the author to author repository.
         authorRepository.save(author);
-        //change author to author Responsedto
+        //change author to author ResponseDto
         AuthorResponseDto authorResponseDto=AuthorConverter.authorToAuthorResponseDto(author);
         return authorResponseDto;
     }
@@ -44,5 +45,39 @@ public class AuthorService {
             finalList.add(author);
         }
         return finalList;
+    }
+
+    public String deleteAuthor(AuthorRequestDtoById id) throws AuthorNotFoundException {
+        Author author;
+        try {
+            author = authorRepository.findById(id.getAuthorId()).get();
+        }
+        catch(Exception e)
+        {
+            throw new AuthorNotFoundException("Opps!!!Author is Not found");
+        }
+        authorRepository.delete(author);
+
+        String authorName=author.getAuthorName();
+
+        return authorName+" This Author Deleted Successfully";
+    }
+    public AuthorResponseDto updateAuthorDetails(AuthorRequestDtoById id) throws AuthorNotFoundException {
+        Author author;
+        try {
+            author = authorRepository.findById(id.getAuthorId()).get();
+        }
+        catch(Exception e)
+        {
+            throw new AuthorNotFoundException("Author is Not Present");
+        }
+        // set the new email id in our repo.
+        author.setAuthorEmail(id.getNewEmail());
+        //save new details in repository.
+        authorRepository.save(author);
+        //make change
+        AuthorResponseDto authorResponseDto=AuthorConverter.authorToAuthorResponseDto(author);
+
+        return authorResponseDto;
     }
 }

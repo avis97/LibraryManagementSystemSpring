@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BookRequestDtoForUpdate {
+public class StudentRequestDtoForUpdate {
     private int studentId;
     private String newEmail;
 }
