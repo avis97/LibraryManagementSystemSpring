@@ -19,7 +19,6 @@ import java.util.*;
 @Getter
 @Setter
 public class LibraryCard{
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cardId;

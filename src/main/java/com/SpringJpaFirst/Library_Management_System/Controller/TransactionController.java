@@ -1,22 +1,20 @@
 package com.SpringJpaFirst.Library_Management_System.Controller;
 
-import com.SpringJpaFirst.Library_Management_System.DTO.IssueBookRequestDto;
-import com.SpringJpaFirst.Library_Management_System.DTO.IssueBookResponseDto;
-import com.SpringJpaFirst.Library_Management_System.Exception.BookNotFoundException;
-import com.SpringJpaFirst.Library_Management_System.Service.TransactionService;
+import com.SpringJpaFirst.Library_Management_System.DTOs.IssueBookRequestDto;
+import com.SpringJpaFirst.Library_Management_System.DTOs.IssueBookResponseDto;
+import com.SpringJpaFirst.Library_Management_System.Entity.Transaction;
+import com.SpringJpaFirst.Library_Management_System.Service.TransactionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import java.util.*;
 
 @RestController
 @RequestMapping("/transaction")
 public class TransactionController{
     @Autowired
-    TransactionService taransacTionService;
+    TransactionServiceImpl taransacTionService;
     @PostMapping("/issue")
     public ResponseEntity issueNewBookTransaction(@RequestBody IssueBookRequestDto requestDto) throws Exception {
         IssueBookResponseDto responseDto;
@@ -29,5 +27,9 @@ public class TransactionController{
         }
         return new ResponseEntity(responseDto,HttpStatus.ACCEPTED);
     }
+    @GetMapping("/getDetailsOf_transaction")
+    public List<Transaction> transactionDetails(){
 
+        return taransacTionService.transactionDetails();
+    }
 }

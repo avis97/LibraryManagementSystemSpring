@@ -1,4 +1,4 @@
-package com.SpringJpaFirst.Library_Management_System.DTO;
+package com.SpringJpaFirst.Library_Management_System.DTOs;
 
 import com.SpringJpaFirst.Library_Management_System.Enum.Genre;
 import lombok.AllArgsConstructor;
@@ -10,9 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BookResponseDto{
-    private String BookName;
+public class BookRequestDto{
+    private String bookName;
     private int price;
     private Genre genre;
-    private String authorName;
+    private boolean bookIsIssued;
+    private int authorId;
+
 }

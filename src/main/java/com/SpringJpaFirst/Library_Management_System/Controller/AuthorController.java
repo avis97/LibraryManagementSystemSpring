@@ -1,10 +1,10 @@
 package com.SpringJpaFirst.Library_Management_System.Controller;
 
-import com.SpringJpaFirst.Library_Management_System.DTO.AuthorRequestDto;
-import com.SpringJpaFirst.Library_Management_System.DTO.AuthorRequestDtoById;
-import com.SpringJpaFirst.Library_Management_System.DTO.AuthorResponseDto;
+import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorRequestDto;
+import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorRequestDtoById;
+import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorResponseDto;
 import com.SpringJpaFirst.Library_Management_System.Exception.AuthorNotFoundException;
-import com.SpringJpaFirst.Library_Management_System.Service.AuthorService;
+import com.SpringJpaFirst.Library_Management_System.Service.AuthorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,28 +14,28 @@ import java.util.*;
 @RequestMapping("/author")
 public class AuthorController{
     @Autowired
-    AuthorService authorService;
+    AuthorServiceImpl authorServiceImpl;
     @PostMapping("/add")
     public AuthorResponseDto addAuthor(@RequestBody AuthorRequestDto authorRequestDto)
     {
-         return  authorService.addAuthor(authorRequestDto);
+         return  authorServiceImpl.addAuthor(authorRequestDto);
     }
     @GetMapping("/find_by_id")
     public AuthorResponseDto findById(@RequestBody AuthorRequestDtoById id)
     {
-        return authorService.findById(id);
+        return authorServiceImpl.findById(id);
     }
     @GetMapping("/findAllAuthor")
     public List<AuthorResponseDto> findAllAuthor()
     {
-        return authorService.findAllAuthor();
+        return authorServiceImpl.findAllAuthor();
     }
     @PutMapping("/updateAuthor")
-    public ResponseEntity updateAuthorDetails(@RequestBody AuthorRequestDtoById id) throws AuthorNotFoundException {
+    public ResponseEntity updateAuthorDetails(@RequestBody AuthorRequestDtoById id) throws AuthorNotFoundException{
         AuthorResponseDto authorResponseDto;
         try
         {
-            authorResponseDto=authorService.updateAuthorDetails(id);
+            authorResponseDto= authorServiceImpl.updateAuthorDetails(id);
         }
         catch(AuthorNotFoundException e)
         {
@@ -47,7 +47,7 @@ public class AuthorController{
     public ResponseEntity deleteAuthor(@RequestBody AuthorRequestDtoById id){
         String name;
         try{
-            name=authorService.deleteAuthor(id);
+            name= authorServiceImpl.deleteAuthor(id);
         }
         catch(AuthorNotFoundException e)
         {

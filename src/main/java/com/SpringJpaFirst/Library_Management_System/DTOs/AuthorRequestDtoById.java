@@ -1,4 +1,4 @@
-package com.SpringJpaFirst.Library_Management_System.DTO;
+package com.SpringJpaFirst.Library_Management_System.DTOs;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class IssueBookRequestDto{
-    private int bookId;
-    private int cardId;
+public class AuthorRequestDtoById{
+    private int authorId;
+    private String newEmail;
 }

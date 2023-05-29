@@ -1,4 +1,4 @@
-package com.SpringJpaFirst.Library_Management_System.DTO;
+package com.SpringJpaFirst.Library_Management_System.DTOs;
 
 import com.SpringJpaFirst.Library_Management_System.Enum.Department;
 import lombok.AllArgsConstructor;

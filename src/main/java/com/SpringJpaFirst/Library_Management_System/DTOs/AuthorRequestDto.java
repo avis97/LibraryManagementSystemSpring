@@ -1,4 +1,4 @@
-package com.SpringJpaFirst.Library_Management_System.DTO;
+package com.SpringJpaFirst.Library_Management_System.DTOs;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

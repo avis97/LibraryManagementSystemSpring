@@ -1,7 +1,7 @@
 package com.SpringJpaFirst.Library_Management_System.Converter;
 
-import com.SpringJpaFirst.Library_Management_System.DTO.AuthorRequestDto;
-import com.SpringJpaFirst.Library_Management_System.DTO.AuthorResponseDto;
+import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorRequestDto;
+import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorResponseDto;
 import com.SpringJpaFirst.Library_Management_System.Entity.Author;
 import lombok.experimental.UtilityClass;
 @UtilityClass

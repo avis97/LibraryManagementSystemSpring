@@ -1,8 +1,7 @@
 package com.SpringJpaFirst.Library_Management_System.Converter;
 
-
-import com.SpringJpaFirst.Library_Management_System.DTO.StudentRequestDto;
-import com.SpringJpaFirst.Library_Management_System.DTO.StudentResponseDto;
+import com.SpringJpaFirst.Library_Management_System.DTOs.StudentRequestDto;
+import com.SpringJpaFirst.Library_Management_System.DTOs.StudentResponseDto;
 import com.SpringJpaFirst.Library_Management_System.Entity.Student;
 import lombok.experimental.UtilityClass;
 
