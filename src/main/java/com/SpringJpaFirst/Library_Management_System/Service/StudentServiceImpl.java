@@ -4,6 +4,7 @@ import com.SpringJpaFirst.Library_Management_System.DTOs.*;
 import com.SpringJpaFirst.Library_Management_System.Entity.LibraryCard;
 import com.SpringJpaFirst.Library_Management_System.Entity.Student;
 import com.SpringJpaFirst.Library_Management_System.Enum.Status;
+import com.SpringJpaFirst.Library_Management_System.Exception.StudentNotFoundException;
 import com.SpringJpaFirst.Library_Management_System.Repository.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,10 +46,15 @@ public class StudentServiceImpl implements StudentService{
         return studentResponseDto;
 
     }
-    public StudentResponseDto findById(StudentRequestDtoById id){
+    public StudentResponseDto findById(StudentRequestDtoById id) throws StudentNotFoundException {
         //get the student by id
-        Student student=studentRepository.findById(id.getStudentId()).get();
-
+        Student student;
+        try {
+            student = studentRepository.findById(id.getStudentId()).get();
+        }
+        catch(Exception e){
+            throw new StudentNotFoundException("StudentId is not present");
+        }
         StudentResponseDto studentResponseDto=StudentConverter.studentToStudentResponseDto(student);
         return studentResponseDto;
     }

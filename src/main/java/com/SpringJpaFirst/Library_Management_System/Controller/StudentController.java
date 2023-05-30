@@ -2,8 +2,11 @@ package com.SpringJpaFirst.Library_Management_System.Controller;
 
 import java.util.*;
 import com.SpringJpaFirst.Library_Management_System.DTOs.*;
+import com.SpringJpaFirst.Library_Management_System.Exception.StudentNotFoundException;
 import com.SpringJpaFirst.Library_Management_System.Service.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,9 +25,15 @@ public class StudentController{
         return studentServiceImpl.findByEmail(mail);
     }
     @GetMapping("/find_by_id}")
-    private StudentResponseDto getStudentByNo(@RequestBody StudentRequestDtoById id)
-    {
-        return studentServiceImpl.findById(id);
+    private ResponseEntity<StudentResponseDto> getStudentByNo(@RequestBody StudentRequestDtoById id) throws StudentNotFoundException{
+        StudentResponseDto studentResponseDto=new StudentResponseDto();
+        try{
+            studentResponseDto=studentServiceImpl.findById(id);
+        }
+        catch(StudentNotFoundException e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(studentResponseDto,HttpStatus.ACCEPTED);
     }
     @PutMapping("update_by_id")
     private StudentResponseDto updateStudentById(@RequestBody StudentRequestDtoForUpdate email)
