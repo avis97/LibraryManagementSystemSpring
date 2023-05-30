@@ -2,7 +2,6 @@ package com.SpringJpaFirst.Library_Management_System.Controller;
 
 import java.util.*;
 import com.SpringJpaFirst.Library_Management_System.DTOs.BookRequestDto;
-import com.SpringJpaFirst.Library_Management_System.DTOs.BookRequestDtoByName;
 import com.SpringJpaFirst.Library_Management_System.DTOs.BookResponseDto;
 import com.SpringJpaFirst.Library_Management_System.Exception.AuthorNotFoundException;
 import com.SpringJpaFirst.Library_Management_System.Service.BookServiceImpl;
@@ -26,8 +25,8 @@ public class BookController{
         }
         return bookResponseDto;
     }
-    @GetMapping("/find_by_name")
-    private BookResponseDto getBookByName(@RequestBody BookRequestDtoByName name)
+    @GetMapping("/find_by_name/{name}")
+    private BookResponseDto getBookByName(@PathVariable("name") String name)
     {
         return bookServiceImpl.getBookByName(name);
     }
@@ -41,8 +40,8 @@ public class BookController{
     {
         return bookServiceImpl.updateBookDetailsByName(bookRequestDto);
     }
-    @DeleteMapping("/delete_book_byName")
-    private String deleteBookById(@RequestBody BookRequestDtoByName name)
+    @DeleteMapping("/delete_book_byName/{name}")
+    private String deleteBookById(@PathVariable("name") String name)
     {
        return bookServiceImpl.deleteBookByName(name);
     }

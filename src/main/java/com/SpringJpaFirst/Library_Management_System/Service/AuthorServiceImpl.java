@@ -2,7 +2,7 @@ package com.SpringJpaFirst.Library_Management_System.Service;
 
 import com.SpringJpaFirst.Library_Management_System.Converter.AuthorConverter;
 import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorRequestDto;
-import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorRequestDtoById;
+import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorRequestDtoByIdAndMail;
 import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorResponseDto;
 import com.SpringJpaFirst.Library_Management_System.Entity.Author;
 import com.SpringJpaFirst.Library_Management_System.Exception.AuthorNotFoundException;
@@ -26,7 +26,7 @@ public class AuthorServiceImpl implements AuthorService{
         AuthorResponseDto authorResponseDto=AuthorConverter.authorToAuthorResponseDto(author);
         return authorResponseDto;
     }
-    public AuthorResponseDto findById(AuthorRequestDtoById id){
+    public AuthorResponseDto findById(AuthorRequestDtoByIdAndMail id){
 
         Author author=authorRepository.findById(id.getAuthorId()).get();
 
@@ -46,7 +46,7 @@ public class AuthorServiceImpl implements AuthorService{
         return finalList;
     }
 
-    public String deleteAuthor(AuthorRequestDtoById id) throws AuthorNotFoundException{
+    public String deleteAuthor(AuthorRequestDtoByIdAndMail id) throws AuthorNotFoundException{
         Author author;
         try {
             author = authorRepository.findById(id.getAuthorId()).get();
@@ -61,7 +61,7 @@ public class AuthorServiceImpl implements AuthorService{
 
         return authorName+" This Author Deleted Successfully";
     }
-    public AuthorResponseDto updateAuthorDetails(AuthorRequestDtoById id) throws AuthorNotFoundException {
+    public AuthorResponseDto updateAuthorDetails(AuthorRequestDtoByIdAndMail id) throws AuthorNotFoundException {
         Author author;
         try {
             author = authorRepository.findById(id.getAuthorId()).get();

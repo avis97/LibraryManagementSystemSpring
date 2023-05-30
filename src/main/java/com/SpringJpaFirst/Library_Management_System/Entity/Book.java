@@ -1,5 +1,6 @@
 package com.SpringJpaFirst.Library_Management_System.Entity;
 
+import com.SpringJpaFirst.Library_Management_System.Enum.ClassFor;
 import com.SpringJpaFirst.Library_Management_System.Enum.Genre;
 import lombok.*;
 
@@ -19,6 +20,8 @@ public class Book{
     private int price;
     @Enumerated(EnumType.STRING)
     private Genre genre;
+    @Enumerated(EnumType.STRING)
+    private ClassFor classFor;
     private boolean bookIsIssued;
     @ManyToOne
     @JoinColumn

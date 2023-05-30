@@ -1,5 +1,6 @@
 package com.SpringJpaFirst.Library_Management_System.DTOs;
 
+import com.SpringJpaFirst.Library_Management_System.Enum.ClassFor;
 import com.SpringJpaFirst.Library_Management_System.Enum.Genre;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,6 +16,7 @@ public class BookRequestDto{
     private int price;
     private Genre genre;
     private boolean bookIsIssued;
+    private ClassFor classFor;
     private int authorId;
 
 }

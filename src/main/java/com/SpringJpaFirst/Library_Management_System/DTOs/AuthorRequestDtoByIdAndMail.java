@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BookRequestDtoByName {
-    private String bookName;
+public class AuthorRequestDtoByIdAndMail{
+    private int authorId;
+    private String newEmail;
 }

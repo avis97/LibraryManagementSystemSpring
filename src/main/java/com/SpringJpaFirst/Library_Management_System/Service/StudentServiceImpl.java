@@ -36,10 +36,10 @@ public class StudentServiceImpl implements StudentService{
 
         return studentResponseDto;
     }
-    public StudentResponseDto findByEmail(StudentRequestDtoByEmail forEmail){
+    public StudentResponseDto findByEmail(String mail){
 
         //find the student by email...the filebyemail method have in student repository
-        Student student=studentRepository.findByStudentEmail(forEmail.getStudentEmail());
+        Student student=studentRepository.findByStudentEmail(mail);
 
         StudentResponseDto studentResponseDto=StudentConverter.studentToStudentResponseDto(student);
         return studentResponseDto;

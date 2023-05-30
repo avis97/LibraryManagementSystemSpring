@@ -3,7 +3,6 @@ package com.SpringJpaFirst.Library_Management_System.Service;
 import java.util.*;
 import com.SpringJpaFirst.Library_Management_System.Converter.BookConverter;
 import com.SpringJpaFirst.Library_Management_System.DTOs.BookRequestDto;
-import com.SpringJpaFirst.Library_Management_System.DTOs.BookRequestDtoByName;
 import com.SpringJpaFirst.Library_Management_System.DTOs.BookResponseDto;
 import com.SpringJpaFirst.Library_Management_System.Entity.Author;
 import com.SpringJpaFirst.Library_Management_System.Entity.Book;
@@ -45,16 +44,16 @@ public class BookServiceImpl implements BookService{
         BookResponseDto bookResponseDto=BookConverter.bookToBookResponseDto(book);
         return bookResponseDto;
     }
-    public BookResponseDto getBookByName(BookRequestDtoByName name){
+    public BookResponseDto getBookByName(String name){
 
-        Book book=bookRepository.findByBookTitle(name.getBookName());
+        Book book=bookRepository.findByBookTitle(name);
 
         //Convert book to bookResponseDto by BookConverter.
         BookResponseDto bookResponseDto=BookConverter.bookToBookResponseDto(book);
         return bookResponseDto;
     }
-    public String deleteBookByName(BookRequestDtoByName name){
-        Book book=bookRepository.findByBookTitle(name.getBookName());
+    public String deleteBookByName(String name){
+        Book book=bookRepository.findByBookTitle(name);
         bookRepository.delete(book);
         String Name=book.getBookTitle();
         return Name+" This Book Deleted Done!!";

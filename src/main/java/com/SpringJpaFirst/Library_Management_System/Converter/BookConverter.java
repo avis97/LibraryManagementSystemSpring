@@ -13,6 +13,7 @@ public class BookConverter {
                 .bookTitle(bookRequestDto.getBookName())
                 .price(bookRequestDto.getPrice())
                 .genre(bookRequestDto.getGenre())
+                .classFor(bookRequestDto.getClassFor())
                 .bookIsIssued(false)
                 .build();
     }
@@ -22,6 +23,7 @@ public class BookConverter {
                .BookName(book.getBookTitle())
                .price(book.getPrice())
                .genre(book.getGenre())
+               .classFor(book.getClassFor())
                .authorName(book.getAuthor().getAuthorName())
                .build();
     }

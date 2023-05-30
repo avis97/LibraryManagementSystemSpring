@@ -1,7 +1,7 @@
 package com.SpringJpaFirst.Library_Management_System.Controller;
 
 import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorRequestDto;
-import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorRequestDtoById;
+import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorRequestDtoByIdAndMail;
 import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorResponseDto;
 import com.SpringJpaFirst.Library_Management_System.Exception.AuthorNotFoundException;
 import com.SpringJpaFirst.Library_Management_System.Service.AuthorServiceImpl;
@@ -21,7 +21,7 @@ public class AuthorController{
          return  authorServiceImpl.addAuthor(authorRequestDto);
     }
     @GetMapping("/find_by_id")
-    public AuthorResponseDto findById(@RequestBody AuthorRequestDtoById id)
+    public AuthorResponseDto findById(@RequestBody AuthorRequestDtoByIdAndMail id)
     {
         return authorServiceImpl.findById(id);
     }
@@ -31,7 +31,7 @@ public class AuthorController{
         return authorServiceImpl.findAllAuthor();
     }
     @PutMapping("/updateAuthor")
-    public ResponseEntity updateAuthorDetails(@RequestBody AuthorRequestDtoById id) throws AuthorNotFoundException{
+    public ResponseEntity updateAuthorDetails(@RequestBody AuthorRequestDtoByIdAndMail id) throws AuthorNotFoundException{
         AuthorResponseDto authorResponseDto;
         try
         {
@@ -44,7 +44,7 @@ public class AuthorController{
         return new ResponseEntity(authorResponseDto,HttpStatus.ACCEPTED);
     }
     @DeleteMapping("/deleteAuthor")
-    public ResponseEntity deleteAuthor(@RequestBody AuthorRequestDtoById id){
+    public ResponseEntity deleteAuthor(@RequestBody AuthorRequestDtoByIdAndMail id){
         String name;
         try{
             name= authorServiceImpl.deleteAuthor(id);

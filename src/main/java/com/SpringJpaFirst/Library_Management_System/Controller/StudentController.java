@@ -16,12 +16,12 @@ public class StudentController{
     {
         return studentServiceImpl.addStudent(studentRequestDto);
     }
-    @GetMapping("/find_by_email")
-    private StudentResponseDto getStudentByEmail(@RequestBody StudentRequestDtoByEmail studentRequestDtoByEmail)
+    @GetMapping("/find_by_email/{mail}")
+    private StudentResponseDto getStudentByEmail(@PathVariable("mail") String mail)
     {
-        return studentServiceImpl.findByEmail(studentRequestDtoByEmail);
+        return studentServiceImpl.findByEmail(mail);
     }
-    @GetMapping("/find_by_id")
+    @GetMapping("/find_by_id}")
     private StudentResponseDto getStudentByNo(@RequestBody StudentRequestDtoById id)
     {
         return studentServiceImpl.findById(id);
