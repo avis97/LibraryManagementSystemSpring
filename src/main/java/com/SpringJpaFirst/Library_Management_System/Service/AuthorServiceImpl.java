@@ -6,7 +6,7 @@ import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorRequestDtoByIdAnd
 import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorResponseDto;
 import com.SpringJpaFirst.Library_Management_System.Entity.Author;
 import com.SpringJpaFirst.Library_Management_System.Exception.AuthorNotFoundException;
-import com.SpringJpaFirst.Library_Management_System.Repository.Repository.AuthorRepository;
+import com.SpringJpaFirst.Library_Management_System.Repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,14 +26,21 @@ public class AuthorServiceImpl implements AuthorService{
         AuthorResponseDto authorResponseDto=AuthorConverter.authorToAuthorResponseDto(author);
         return authorResponseDto;
     }
-    public AuthorResponseDto findById(AuthorRequestDtoByIdAndMail id){
-
-        Author author=authorRepository.findById(id.getAuthorId()).get();
-
+    public AuthorResponseDto findById(int id) throws AuthorNotFoundException {
+        Author author;
+        try {
+            author = authorRepository.findById(id).get();
+        }catch (Exception e){
+            throw new AuthorNotFoundException("Author is not present in our database..");
+        }
+        //make the author response dto
         AuthorResponseDto authorResponseDto=AuthorConverter.authorToAuthorResponseDto(author);
         return authorResponseDto;
     }
-
+    public Author findAuthorByName(String name){
+        Author author=authorRepository.findByAuthorName(name);
+        return author;
+    }
     public List<AuthorResponseDto> findAllAuthor(){
         List<Author> list=authorRepository.findAll();
 
@@ -61,6 +68,7 @@ public class AuthorServiceImpl implements AuthorService{
 
         return authorName+" This Author Deleted Successfully";
     }
+
     public AuthorResponseDto updateAuthorDetails(AuthorRequestDtoByIdAndMail id) throws AuthorNotFoundException {
         Author author;
         try {

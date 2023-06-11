@@ -1,4 +1,4 @@
-package com.SpringJpaFirst.Library_Management_System.Repository.Repository;
+package com.SpringJpaFirst.Library_Management_System.Repository;
 
 import com.SpringJpaFirst.Library_Management_System.DTOs.StudentRequestDtoById;
 import com.SpringJpaFirst.Library_Management_System.Entity.Student;

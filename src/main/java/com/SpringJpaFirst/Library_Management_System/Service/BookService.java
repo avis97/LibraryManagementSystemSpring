@@ -7,7 +7,6 @@ import com.SpringJpaFirst.Library_Management_System.Exception.AuthorNotFoundExce
 import java.util.List;
 
 public interface BookService{
-
     BookResponseDto addBook(BookRequestDto bookRequestDto) throws AuthorNotFoundException;
     BookResponseDto getBookByName(String name);
     String deleteBookByName(String name);

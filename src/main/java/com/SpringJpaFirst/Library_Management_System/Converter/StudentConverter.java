@@ -16,6 +16,7 @@ public class StudentConverter{
                 .department(studentRequestDto.getDepartment())
                 .build();
     }
+
     public static StudentResponseDto studentToStudentResponseDto(Student student)
     {
         return StudentResponseDto.builder()

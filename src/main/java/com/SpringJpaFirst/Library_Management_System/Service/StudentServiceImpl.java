@@ -5,7 +5,7 @@ import com.SpringJpaFirst.Library_Management_System.Entity.LibraryCard;
 import com.SpringJpaFirst.Library_Management_System.Entity.Student;
 import com.SpringJpaFirst.Library_Management_System.Enum.Status;
 import com.SpringJpaFirst.Library_Management_System.Exception.StudentNotFoundException;
-import com.SpringJpaFirst.Library_Management_System.Repository.Repository.StudentRepository;
+import com.SpringJpaFirst.Library_Management_System.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.*;
@@ -37,6 +37,7 @@ public class StudentServiceImpl implements StudentService{
 
         return studentResponseDto;
     }
+
     public StudentResponseDto findByEmail(String mail){
 
         //find the student by email...the filebyemail method have in student repository
@@ -46,6 +47,7 @@ public class StudentServiceImpl implements StudentService{
         return studentResponseDto;
 
     }
+
     public StudentResponseDto findById(StudentRequestDtoById id) throws StudentNotFoundException {
         //get the student by id
         Student student;
@@ -58,6 +60,7 @@ public class StudentServiceImpl implements StudentService{
         StudentResponseDto studentResponseDto=StudentConverter.studentToStudentResponseDto(student);
         return studentResponseDto;
     }
+
     public String deleteStudentById(StudentRequestDtoById id){
 
         Student student=studentRepository.findById(id.getStudentId()).get();
@@ -65,6 +68,7 @@ public class StudentServiceImpl implements StudentService{
         String name=student.getStudentName();
         return name+" This student deleted!!";
     }
+
     public StudentResponseDto updateStudentById(StudentRequestDtoForUpdate email){
 
         Student student=studentRepository.findById(email.getStudentId()).get();

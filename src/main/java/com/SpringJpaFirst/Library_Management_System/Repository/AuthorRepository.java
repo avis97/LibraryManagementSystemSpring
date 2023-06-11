@@ -1,4 +1,4 @@
-package com.SpringJpaFirst.Library_Management_System.Repository.Repository;
+package com.SpringJpaFirst.Library_Management_System.Repository;
 
 import com.SpringJpaFirst.Library_Management_System.Entity.Author;
 import com.SpringJpaFirst.Library_Management_System.Entity.Book;
@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author,Integer>{
-
-//    Book findByBookTitle(String name);
+    Author findByAuthorName(String name);
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class BookController{
     @Autowired
     BookServiceImpl bookServiceImpl;
+
     @PostMapping("/add")
     private BookResponseDto addBook(@RequestBody  BookRequestDto bookRequestDto) throws AuthorNotFoundException {
         BookResponseDto bookResponseDto;
@@ -30,16 +31,19 @@ public class BookController{
     {
         return bookServiceImpl.getBookByName(name);
     }
+
     @GetMapping("/allBooks")
     private List<BookResponseDto> getAllBooks()
     {
         return bookServiceImpl.getAllBooks();
     }
+
     @PutMapping("/updateBookdetails")
     private BookResponseDto updateBookDetailsByName(@RequestBody BookRequestDto bookRequestDto)
     {
         return bookServiceImpl.updateBookDetailsByName(bookRequestDto);
     }
+
     @DeleteMapping("/delete_book_byName/{name}")
     private String deleteBookById(@PathVariable("name") String name)
     {
