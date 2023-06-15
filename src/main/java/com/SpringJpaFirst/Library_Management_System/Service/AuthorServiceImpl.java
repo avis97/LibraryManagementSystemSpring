@@ -26,7 +26,7 @@ public class AuthorServiceImpl implements AuthorService{
         AuthorResponseDto authorResponseDto=AuthorConverter.authorToAuthorResponseDto(author);
         return authorResponseDto;
     }
-    public AuthorResponseDto findById(int id) throws AuthorNotFoundException {
+    public AuthorResponseDto findById(int id) throws AuthorNotFoundException{
         Author author;
         try {
             author = authorRepository.findById(id).get();
@@ -37,8 +37,13 @@ public class AuthorServiceImpl implements AuthorService{
         AuthorResponseDto authorResponseDto=AuthorConverter.authorToAuthorResponseDto(author);
         return authorResponseDto;
     }
-    public Author findAuthorByName(String name){
-        Author author=authorRepository.findByAuthorName(name);
+    public Author findAuthorByName(String name) throws AuthorNotFoundException {
+        Author author;
+        try {
+            author = authorRepository.findByAuthorName(name);
+        }catch (Exception e){
+            throw new AuthorNotFoundException("Author is not present in our library");
+        }
         return author;
     }
     public List<AuthorResponseDto> findAllAuthor(){

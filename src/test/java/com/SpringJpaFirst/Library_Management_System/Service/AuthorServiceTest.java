@@ -1,6 +1,7 @@
 package com.SpringJpaFirst.Library_Management_System.Service;
 
 import com.SpringJpaFirst.Library_Management_System.Entity.Author;
+import com.SpringJpaFirst.Library_Management_System.Exception.AuthorNotFoundException;
 import com.SpringJpaFirst.Library_Management_System.Repository.AuthorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ class AuthorServiceTest {
 
     }
     @Test
-    void findAuthorByName(){
+    void findAuthorByName() throws AuthorNotFoundException {
         String name="Avishek";
         Author author=authorService.findAuthorByName(name);
         assertEquals(name,author.getAuthorName());

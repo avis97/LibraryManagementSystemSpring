@@ -2,6 +2,7 @@ package com.SpringJpaFirst.Library_Management_System.Controller;
 
 import java.util.*;
 import com.SpringJpaFirst.Library_Management_System.DTOs.*;
+import com.SpringJpaFirst.Library_Management_System.Entity.Student;
 import com.SpringJpaFirst.Library_Management_System.Exception.StudentNotFoundException;
 import com.SpringJpaFirst.Library_Management_System.Service.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,10 @@ public class StudentController{
     {
         return studentServiceImpl.highestAgeStudent();
     }
-
+    @GetMapping("/getStudentByAge/{age}")
+    private List<StudentResponseDto> findStudentBySameAge(@PathVariable("age") int age){
+        return studentServiceImpl.findStudentBySameAge(age);
+    }
     @DeleteMapping("/delete_by_id")
     private  String  deleteStudentById(@RequestBody StudentRequestDtoById id)
     {

@@ -96,10 +96,10 @@ public class StudentServiceImpl implements StudentService{
     }
 
     public StudentResponseDto highestAgeStudent(){
-        List<Student> students=studentRepository.findAll();
+        List<Student> studentsList=studentRepository.findAll();
         int maxAge=0;
         Student mainStudent=new Student();
-        for(Student student:students)
+        for(Student student:studentsList)
         {
             int age=student.getStudentAge();
             if(maxAge<age)
@@ -111,5 +111,15 @@ public class StudentServiceImpl implements StudentService{
         //convert to studentResponseDto
         StudentResponseDto studentResponseDto=StudentConverter.studentToStudentResponseDto(mainStudent);
         return studentResponseDto;
+    }
+    public List<StudentResponseDto> findStudentBySameAge(int age){
+
+        List<Student> studentList=studentRepository.findByStudentByAge(age);
+        List<StudentResponseDto> finalList=new ArrayList<>();
+        for(Student student:studentList){
+            StudentResponseDto responseDto=StudentConverter.studentToStudentResponseDto(student);
+            finalList.add(responseDto);
+        }
+        return finalList;
     }
 }

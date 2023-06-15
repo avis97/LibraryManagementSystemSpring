@@ -87,7 +87,6 @@ public class TransactionServiceImpl implements TransactionService{
         bookResponseDto.setTransactionStatus(TransactionStatus.SUCCESS);
         return bookResponseDto;
         }
-
     public List<Transaction> transactionDetails(){
         List<Transaction> list=transactionRepository.findAll();
         return list;

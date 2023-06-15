@@ -1,6 +1,7 @@
 package com.SpringJpaFirst.Library_Management_System.Controller;
 
 import com.SpringJpaFirst.Library_Management_System.Entity.Author;
+import com.SpringJpaFirst.Library_Management_System.Exception.AuthorNotFoundException;
 import com.SpringJpaFirst.Library_Management_System.Repository.AuthorRepository;
 import com.SpringJpaFirst.Library_Management_System.Service.AuthorService;
 import com.SpringJpaFirst.Library_Management_System.Service.AuthorServiceImpl;
@@ -28,8 +29,8 @@ class AuthorControllerTest{
     AuthorServiceImpl authorService;
     Author author;
     @BeforeEach
-    void setUp(){
-    author=authorService.findAuthorByName("Avishek");
+    void setUp() throws AuthorNotFoundException {
+ //   author=authorService.findAuthorByName("Avishek");
     }
     @Test
     void findAuthorByName() throws Exception{

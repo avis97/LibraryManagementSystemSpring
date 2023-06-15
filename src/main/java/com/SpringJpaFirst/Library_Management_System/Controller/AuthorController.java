@@ -9,8 +9,10 @@ import com.SpringJpaFirst.Library_Management_System.Service.AuthorServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 @RestController
@@ -18,6 +20,14 @@ import java.util.*;
 public class AuthorController{
     @Autowired
     AuthorServiceImpl authorServiceImpl;
+
+    @Value("${welcome.message}")
+    private String welComeMessage;
+    @GetMapping("/home")
+    public String getWelComePage(){
+        return welComeMessage;
+    }
+
     //logger for debug
     private final Logger LOGGER=
                 LoggerFactory.getLogger(AuthorController.class);
@@ -29,7 +39,7 @@ public class AuthorController{
          return  authorServiceImpl.addAuthor(authorRequestDto);
     }
     @GetMapping("/find_by_id/{id}")
-    public ResponseEntity findById(@PathVariable("id") int id) throws AuthorNotFoundException {
+    public ResponseEntity findById(@PathVariable("id") int id) throws AuthorNotFoundException{
           AuthorResponseDto authorResponseDto;
           try{
               authorResponseDto=authorServiceImpl.findById(id);
@@ -45,7 +55,7 @@ public class AuthorController{
     }
 
     @PutMapping("/updateAuthor")
-    public ResponseEntity updateAuthorDetails(@RequestBody AuthorRequestDtoByIdAndMail id) throws AuthorNotFoundException{
+    public ResponseEntity updateAuthorDetails(@RequestBody AuthorRequestDtoByIdAndMail id){
         AuthorResponseDto authorResponseDto;
         try
         {
@@ -58,8 +68,14 @@ public class AuthorController{
         return new ResponseEntity(authorResponseDto,HttpStatus.ACCEPTED);
     }
     @GetMapping("/findAuthorByName/{name}")
-    public Author findAuthorByName(@PathVariable("name") String name){
-       return authorServiceImpl.findAuthorByName(name);
+    public ResponseEntity findAuthorByName(@PathVariable("name") String name){
+        Author author;
+        try{
+            author=authorServiceImpl.findAuthorByName(name);
+        }catch (AuthorNotFoundException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+       return new ResponseEntity(author,HttpStatus.ACCEPTED);
     }
     @DeleteMapping("/deleteAuthor")
     public ResponseEntity deleteAuthor(@RequestBody AuthorRequestDtoByIdAndMail id){

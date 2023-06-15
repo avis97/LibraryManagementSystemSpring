@@ -14,5 +14,5 @@ public interface AuthorService{
     List<AuthorResponseDto> findAllAuthor();
     String deleteAuthor(AuthorRequestDtoByIdAndMail id)throws AuthorNotFoundException;
     AuthorResponseDto updateAuthorDetails(AuthorRequestDtoByIdAndMail id) throws AuthorNotFoundException;
-    Author findAuthorByName(String name);
+    Author findAuthorByName(String name) throws AuthorNotFoundException;
 }
