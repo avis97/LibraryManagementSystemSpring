@@ -17,19 +17,19 @@ public class StudentController{
     StudentServiceImpl studentServiceImpl;
 
     @PostMapping("/add")
-    private StudentResponseDto addStudent(@RequestBody StudentRequestDto studentRequestDto)
+    public  StudentResponseDto addStudent(@RequestBody StudentRequestDto studentRequestDto)
     {
         return studentServiceImpl.addStudent(studentRequestDto);
     }
 
     @GetMapping("/find_by_email/{mail}")
-    private StudentResponseDto getStudentByEmail(@PathVariable("mail") String mail)
+    public StudentResponseDto getStudentByEmail(@PathVariable("mail") String mail)
     {
         return studentServiceImpl.findByEmail(mail);
     }
 
-    @GetMapping("/find_by_id}")
-    private ResponseEntity<StudentResponseDto> getStudentByNo(@RequestBody StudentRequestDtoById id) throws StudentNotFoundException{
+    @GetMapping("/find_by_id")
+    public ResponseEntity<StudentResponseDto> getStudentByNo(@RequestBody StudentRequestDtoById id) throws StudentNotFoundException{
         StudentResponseDto studentResponseDto=new StudentResponseDto();
         try{
             studentResponseDto=studentServiceImpl.findById(id);
@@ -41,13 +41,13 @@ public class StudentController{
     }
 
     @PutMapping("update_by_id")
-    private StudentResponseDto updateStudentById(@RequestBody StudentRequestDtoForUpdate email)
+    public StudentResponseDto updateStudentById(@RequestBody StudentRequestDtoForUpdate email)
     {
         return studentServiceImpl.updateStudentById(email);
     }
 
     @GetMapping("/allStudent")
-    private List<StudentResponseDto> allStudentDetails()
+    public List<StudentResponseDto> allStudentDetails()
     {
         return studentServiceImpl.allStudentDetails();
     }
@@ -58,7 +58,7 @@ public class StudentController{
         return studentServiceImpl.highestAgeStudent();
     }
     @GetMapping("/getStudentByAge/{age}")
-    private List<StudentResponseDto> findStudentBySameAge(@PathVariable("age") int age){
+    public List<StudentResponseDto> findStudentBySameAge(@PathVariable("age") int age){
         return studentServiceImpl.findStudentBySameAge(age);
     }
     @DeleteMapping("/delete_by_id")

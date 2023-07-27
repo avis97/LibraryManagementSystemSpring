@@ -1,5 +1,6 @@
 package com.SpringJpaFirst.Library_Management_System.Controller;
 
+
 import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorRequestDto;
 import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorRequestDtoByIdAndMail;
 import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorResponseDto;
@@ -20,7 +21,6 @@ import java.util.*;
 public class AuthorController{
     @Autowired
     AuthorServiceImpl authorServiceImpl;
-
     @Value("${welcome.message}")
     private String welComeMessage;
     @GetMapping("/home")
@@ -46,6 +46,7 @@ public class AuthorController{
           }catch(AuthorNotFoundException e){
               return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
           }
+          LOGGER.info("This is the Author.");
           return new  ResponseEntity(authorResponseDto,HttpStatus.ACCEPTED);
     }
 
@@ -77,6 +78,16 @@ public class AuthorController{
         }
        return new ResponseEntity(author,HttpStatus.ACCEPTED);
     }
+    @GetMapping("/getAuthorByAge/{age}")
+    public ResponseEntity authorByAge(@PathVariable("age") int age){
+        List<Author> authors;
+        try{
+            authors=authorServiceImpl.authorByAge(age);
+        }catch (AuthorNotFoundException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity(authors,HttpStatus.ACCEPTED);
+    }
     @DeleteMapping("/deleteAuthor")
     public ResponseEntity deleteAuthor(@RequestBody AuthorRequestDtoByIdAndMail id){
         String name;
@@ -89,4 +100,5 @@ public class AuthorController{
         }
         return new ResponseEntity(name,HttpStatus.ACCEPTED);
     }
+
 }

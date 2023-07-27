@@ -92,4 +92,16 @@ public class AuthorServiceImpl implements AuthorService{
 
         return authorResponseDto;
     }
+    public List<Author> authorByAge(int age) throws AuthorNotFoundException {
+        List<Author> list;
+        try{
+            list=authorRepository.findByAuthorAge(age);
+            if(list.isEmpty()){
+                throw new AuthorNotFoundException("Author is not present in our library.");
+            }
+        }catch(Exception e){
+            throw new AuthorNotFoundException("Author Is Not present");
+        }
+        return list;
+    }
 }

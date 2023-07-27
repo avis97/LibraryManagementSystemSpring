@@ -27,10 +27,12 @@ class AuthorRepositoryTest{
     public void findAuthorById(){
         Author author=authorRepository.findById(1).get();
         System.out.println(author.getAuthorName());
+        assertEquals(1,author.getAuthorId());
     }
     @Test
     public void findAuthorByName(){
         Author author=authorRepository.findByAuthorName("Avishek");
         System.out.println(author.getAuthorName());
+        assertEquals("Avishek",author.getAuthorName());
     }
 }
