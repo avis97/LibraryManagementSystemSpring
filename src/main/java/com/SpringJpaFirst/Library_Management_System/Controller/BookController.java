@@ -4,7 +4,7 @@ import java.util.*;
 import com.SpringJpaFirst.Library_Management_System.DTOs.BookRequestDto;
 import com.SpringJpaFirst.Library_Management_System.DTOs.BookResponseDto;
 import com.SpringJpaFirst.Library_Management_System.Exception.AuthorNotFoundException;
-import com.SpringJpaFirst.Library_Management_System.Service.BookServiceImpl;
+import com.SpringJpaFirst.Library_Management_System.Service.AuthorImpl.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

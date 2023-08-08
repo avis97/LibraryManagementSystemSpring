@@ -1,4 +1,4 @@
-package com.SpringJpaFirst.Library_Management_System.Service;
+package com.SpringJpaFirst.Library_Management_System.Service.AuthorImpl;
 
 import com.SpringJpaFirst.Library_Management_System.Converter.AuthorConverter;
 import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorRequestDto;
@@ -7,13 +7,14 @@ import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorResponseDto;
 import com.SpringJpaFirst.Library_Management_System.Entity.Author;
 import com.SpringJpaFirst.Library_Management_System.Exception.AuthorNotFoundException;
 import com.SpringJpaFirst.Library_Management_System.Repository.AuthorRepository;
+import com.SpringJpaFirst.Library_Management_System.Service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.*;
 @Service
-public class AuthorServiceImpl implements AuthorService{
+public class AuthorServiceImpl implements AuthorService {
     @Autowired
     AuthorRepository authorRepository;
     public AuthorResponseDto addAuthor(AuthorRequestDto authorRequestDto){

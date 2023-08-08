@@ -1,4 +1,4 @@
-package com.SpringJpaFirst.Library_Management_System.Service;
+package com.SpringJpaFirst.Library_Management_System.Service.AuthorImpl;
 
 import java.util.*;
 import com.SpringJpaFirst.Library_Management_System.Converter.BookConverter;
@@ -9,11 +9,12 @@ import com.SpringJpaFirst.Library_Management_System.Entity.Book;
 import com.SpringJpaFirst.Library_Management_System.Exception.AuthorNotFoundException;
 import com.SpringJpaFirst.Library_Management_System.Repository.AuthorRepository;
 import com.SpringJpaFirst.Library_Management_System.Repository.BookRepository;
+import com.SpringJpaFirst.Library_Management_System.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BookServiceImpl implements BookService{
+public class BookServiceImpl implements BookService {
     @Autowired
     AuthorRepository authorRepository;
     @Autowired
