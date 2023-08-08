@@ -3,7 +3,7 @@
  the Book with the student and also can handle the all details about student, book, library card and transaction with student and can change some details by using this application.
  This is a Spring Maven project I used MySql driver for handle the database and for Connect the Database I used 
  hibernate jdbc . I made some Rest APIs in this application for some operation by this GET/DELETE/PUT/PUSH methods.
-
+ Also used Basic Spring Security in this project.
 
 ### MAVEN SPRING DEPENDENCY
 * MySql Driver.
