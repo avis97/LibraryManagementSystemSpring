@@ -14,5 +14,6 @@ public class StudentResponseDto{
     private String StudentName;
     private String StudentEmail;
     private Department Department;
+    private String imageName;
     private int Age;
 }

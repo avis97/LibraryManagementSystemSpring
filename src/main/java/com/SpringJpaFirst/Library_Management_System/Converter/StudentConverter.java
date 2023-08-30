@@ -24,6 +24,25 @@ public class StudentConverter{
                 .StudentEmail(student.getStudentEmail())
                 .Age(student.getStudentAge())
                 .Department(student.getDepartment())
+                .imageName(student.getImageName())
+                .build();
+    }
+    public static Student StudentResponseDtoToStudent(StudentResponseDto dto){
+        return  Student.builder()
+                .studentName(dto.getStudentName())
+                .studentEmail(dto.getStudentEmail())
+                .studentAge(dto.getAge())
+                .department(dto.getDepartment())
+                .imageName(dto.getImageName())
+                .build();
+    }
+    public static StudentRequestDto StudentToStudentRequestDto(Student student){
+        return StudentRequestDto.builder()
+                .imageFile(student.getImageName())
+                .name(student.getStudentName())
+                .age(student.getStudentAge())
+                .department(student.getDepartment())
+                .email(student.getStudentEmail())
                 .build();
     }
 }

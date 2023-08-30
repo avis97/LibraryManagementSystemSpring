@@ -7,10 +7,11 @@ import java.util.List;
 public interface StudentService{
     StudentResponseDto addStudent(StudentRequestDto studentRequestDto);
     StudentResponseDto findByEmail(String mail);
-    StudentResponseDto findById(StudentRequestDtoById id) throws StudentNotFoundException;
+    StudentResponseDto findById(int id) throws StudentNotFoundException;
     String deleteStudentById(StudentRequestDtoById id);
     StudentResponseDto updateStudentById(StudentRequestDtoForUpdate email);
     List<StudentResponseDto> allStudentDetails();
     StudentResponseDto highestAgeStudent();
     List<StudentResponseDto> findStudentBySameAge(int age);
+    StudentResponseDto updateImage(StudentRequestDto dto,int studentId) throws StudentNotFoundException;
 }

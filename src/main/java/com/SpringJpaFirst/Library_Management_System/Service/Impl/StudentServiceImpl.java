@@ -13,7 +13,7 @@ import java.util.*;
 import java.util.List;
 
 @Service
-public class StudentServiceImpl implements StudentService {
+public class StudentServiceImpl implements StudentService{
 
     @Autowired
     StudentRepository studentRepository;
@@ -48,12 +48,23 @@ public class StudentServiceImpl implements StudentService {
         return studentResponseDto;
 
     }
-
-    public StudentResponseDto findById(StudentRequestDtoById id) throws StudentNotFoundException {
+    public StudentResponseDto updateImage(StudentRequestDto dto,int studentId) throws StudentNotFoundException {
+        Student student;
+        try{
+            student=studentRepository.findById(studentId).get();
+        }catch (Exception e){
+            throw new StudentNotFoundException("Student Id invalid");
+        }
+        student.setImageName(dto.getImageFile());
+        studentRepository.save(student);
+        StudentResponseDto studentResponseDto=StudentConverter.studentToStudentResponseDto(student);
+        return studentResponseDto;
+    }
+    public StudentResponseDto findById(int id) throws StudentNotFoundException {
         //get the student by id
         Student student;
         try {
-            student = studentRepository.findById(id.getStudentId()).get();
+            student = studentRepository.findById(id).get();
         }
         catch(Exception e){
             throw new StudentNotFoundException("StudentId is not present");
