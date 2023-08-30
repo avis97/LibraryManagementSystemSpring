@@ -20,6 +20,9 @@ public class Student{
     @Enumerated(EnumType.STRING)
     private Department department;
     private String studentEmail;
+
+    @Column(name = "Image_File")
+    private String imageName;
     @OneToOne(mappedBy ="student",cascade = CascadeType.ALL)
     LibraryCard card;
 }

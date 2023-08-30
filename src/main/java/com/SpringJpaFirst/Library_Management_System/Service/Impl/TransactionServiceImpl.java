@@ -1,4 +1,4 @@
-package com.SpringJpaFirst.Library_Management_System.Service.AuthorImpl;
+package com.SpringJpaFirst.Library_Management_System.Service.Impl;
 import com.SpringJpaFirst.Library_Management_System.DTOs.IssueBookRequestDto;
 import com.SpringJpaFirst.Library_Management_System.DTOs.IssueBookResponseDto;
 import com.SpringJpaFirst.Library_Management_System.Entity.Book;

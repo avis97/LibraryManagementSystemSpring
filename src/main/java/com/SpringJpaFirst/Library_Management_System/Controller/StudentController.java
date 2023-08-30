@@ -3,7 +3,7 @@ package com.SpringJpaFirst.Library_Management_System.Controller;
 import java.util.*;
 import com.SpringJpaFirst.Library_Management_System.DTOs.*;
 import com.SpringJpaFirst.Library_Management_System.Exception.StudentNotFoundException;
-import com.SpringJpaFirst.Library_Management_System.Service.AuthorImpl.StudentServiceImpl;
+import com.SpringJpaFirst.Library_Management_System.Service.Impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

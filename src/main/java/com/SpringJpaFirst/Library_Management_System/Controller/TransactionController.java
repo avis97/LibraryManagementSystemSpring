@@ -3,7 +3,7 @@ package com.SpringJpaFirst.Library_Management_System.Controller;
 import com.SpringJpaFirst.Library_Management_System.DTOs.IssueBookRequestDto;
 import com.SpringJpaFirst.Library_Management_System.DTOs.IssueBookResponseDto;
 import com.SpringJpaFirst.Library_Management_System.Entity.Transaction;
-import com.SpringJpaFirst.Library_Management_System.Service.AuthorImpl.TransactionServiceImpl;
+import com.SpringJpaFirst.Library_Management_System.Service.Impl.TransactionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

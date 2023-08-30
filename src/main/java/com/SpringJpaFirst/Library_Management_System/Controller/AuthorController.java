@@ -6,7 +6,7 @@ import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorRequestDtoByIdAnd
 import com.SpringJpaFirst.Library_Management_System.DTOs.AuthorResponseDto;
 import com.SpringJpaFirst.Library_Management_System.Entity.Author;
 import com.SpringJpaFirst.Library_Management_System.Exception.AuthorNotFoundException;
-import com.SpringJpaFirst.Library_Management_System.Service.AuthorImpl.AuthorServiceImpl;
+import com.SpringJpaFirst.Library_Management_System.Service.Impl.AuthorServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
